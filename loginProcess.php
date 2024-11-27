@@ -16,18 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // SQL query to check the user
-    $sql = "SELECT * FROM users WHERE email = ?";
+    $sql = "SELECT * FROM users WHERE Email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->execute([$email]);
 
     // Fetch user information
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) { // Corrected variable name to $user for consistency
-        if (password_verify($password, $user['password'])) {
+    if ($user) {
+        if (password_verify($password, $user['UserPassword'])) {
             // Store user information in session
-            $_SESSION['id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
+            $_SESSION['id'] = $user['UserId'];
+            $_SESSION['username'] = $user['UserName'];
 
             // Redirect to the desired page after successful login
             header('Location: chat.php');
