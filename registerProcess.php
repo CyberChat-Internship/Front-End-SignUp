@@ -1,8 +1,12 @@
 <?php
 require_once 'config.php';
 
+session_start();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Collect and sanitize form data
+    $firstname = trim($_POST['firstname']);
+    $lastname = trim($_POST['lastname']);
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];
@@ -27,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Check if the email already exists
-        $check_email = "SELECT * FROM users WHERE email = ?";
+        $check_email = "SELECT * FROM users WHERE Email = ?";
         $stmt_check = $conn->prepare($check_email);
         $stmt_check->execute([$email]);
 
@@ -38,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Insert new user into the database
-        $query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+        $query = "INSERT INTO users (FirstName, LastName, UserName, Email, UserPassword) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($query);
 
-        if ($stmt->execute([$username, $email, $hashed_password])) {
+        if ($stmt->execute([$firstname, $lastname, $username, $email, $hashed_password])) {
             $_SESSION['success'] = "Registration successful! Please log in.";
-            header('Location: login.php'); 
+            header('Location: login.php');
             exit();
         } else {
             $_SESSION['error'] = "Registration failed. Please try again.";
