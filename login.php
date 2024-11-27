@@ -89,8 +89,16 @@
     <!-- Register Form -->
     <form id="register-form" action="registerProcess.php" method="POST" style="display: none;">
       <div class="form-group">
+        <label for="register-firstname">First Name:</label>
+        <input type="text" id="register-firstname" name="firstname" required>
+      </div>
+      <div class="form-group">
+        <label for="register-lastname">Last Name:</label>
+        <input type="text" id="register-lastname" name="lastname" required>
+      </div>
+      <div class="form-group">
         <label for="register-username">Username:</label>
-        <input type="text" id="register-username" name="username"required>
+        <input type="text" id="register-username" name="username" required>
       </div>
       <div class="form-group">
         <label for="register-email">Email:</label>
@@ -98,7 +106,7 @@
       </div>
       <div class="form-group">
         <label for="register-password">Password:</label>
-        <input type="password" id="register-password" name="password"required>
+        <input type="password" id="register-password" name="password" required>
       </div>
       <div class="form-group">
         <label for="confirm-password">Confirm Password:</label>
@@ -106,9 +114,8 @@
       </div>
       <button type="submit" class="btn">Register</button>
     </form>
-
     <div class="toggle-btn" onclick="toggleForm()">Don't have an account? Register</div>
-  </div>
+
 
   <script>
     function toggleForm() {
